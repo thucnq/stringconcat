@@ -14,7 +14,7 @@ func plusOperator() string {
 	s1 := "hello"
 	s2 := "world"
 
-	return (s1 + s2)
+	return s1 + s2
 }
 func appendOperator() string {
 	s1 := "hello"
@@ -54,6 +54,16 @@ func stringBuilder() string {
 	str.WriteString(s2)
 
 	return str.String()
+}
+
+func copyString() string {
+	s1 := "hello"
+	s2 := "world"
+
+	str := make([]byte, len(s1)+len(s2))
+	copy(str, s1)
+	copy(str[len(s1):], s2)
+	return string(str)
 }
 
 func plusOperatorThousandTimes() string {

@@ -37,6 +37,16 @@ func BenchmarkStringBuilderOperator(b *testing.B) {
 		stringBuilder()
 	}
 }
+func BenchmarkStringRepeatOperator(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		stringBuilder()
+	}
+}
+func BenchmarkCopyOperator(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		copyString()
+	}
+}
 
 func BenchmarkPlusOperatorThousandTimes(b *testing.B) {
 	s1 := "hello"
@@ -59,11 +69,9 @@ func BenchmarkAppendOperatorThousandTimes(b *testing.B) {
 func BenchmarkSprintfOperatorThousandTimes(b *testing.B) {
 	s1 := "hello"
 	s2 := "world"
-
 	for i := 0; i < b.N; i++ {
 		s1 = fmt.Sprintf("%s%s", s1, s2)
 	}
-	_ = s1
 }
 func BenchmarkJoinOperatorThousandTimes(b *testing.B) {
 	s1 := "hello"
@@ -108,4 +116,19 @@ func BenchmarkStringBuilderOperatorThousandTimes(b *testing.B) {
 	}
 
 	_ = str.String()
+}
+func BenchmarkStringRepeatOperatorThousandTimes(b *testing.B) {
+	s1 := "hello"
+	strings.Repeat(s1, b.N)
+}
+func BenchmarkCopyStringOperatorThousandTimes(b *testing.B) {
+	s1 := "hello"
+	s2 := "world"
+
+	str := make([]byte, len(s1)+len(s2)*b.N)
+	copy(str, s1)
+	for i := 0; i < b.N; i++ {
+		copy(str[len(s1)+len(s2)*i:], s2)
+	}
+	_ = string(str)
 }
