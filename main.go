@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
 )
@@ -28,6 +29,22 @@ func sprintf() string {
 
 	return fmt.Sprintf("%s%s", s1, s2)
 }
+func join() string {
+	s1 := "hello"
+	s2 := "world"
+
+	return strings.Join([]string{s1, s2}, "")
+}
+func byteBuffer() string {
+	s1 := "hello"
+	s2 := "world"
+
+	var buffer bytes.Buffer
+	buffer.WriteString(s1)
+	buffer.WriteString(s2)
+
+	return buffer.String()
+}
 func stringBuilder() string {
 	s1 := "hello"
 	s2 := "world"
@@ -43,7 +60,7 @@ func plusOperatorThousandTimes() string {
 	s1 := "hello"
 	s2 := "world"
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 1000; i++ {
 		s1 = s1 + s2
 	}
 	return s1
@@ -52,7 +69,7 @@ func appendOperatorThousandTimes() string {
 	s1 := "hello"
 	s2 := "world"
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 1000; i++ {
 		s1 += s2
 	}
 	return s1
@@ -61,10 +78,42 @@ func sprintfThousandTimes() string {
 	s1 := "hello"
 	s2 := "world"
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 1000; i++ {
 		s1 += fmt.Sprintf("%s%s", s1, s2)
 	}
 	return s1
+}
+func joinThousandTimes() string {
+	s1 := "hello"
+	s2 := "world"
+
+	for i := 0; i < 1000; i++ {
+		s1 = strings.Join([]string{s1, s2}, "")
+	}
+	return strings.Join([]string{s1, s2}, "")
+}
+func joinThousandStrings() string {
+	s1 := "hello"
+	s2 := "world"
+
+	arr := make([]string, 1001)
+	arr[0] = s1
+	for i := 0; i < 1000; i++ {
+		arr = append(arr, s2)
+	}
+	return strings.Join(arr, "")
+}
+func byteBufferThousandTimes() string {
+	s1 := "hello"
+	s2 := "world"
+
+	var str bytes.Buffer
+	str.WriteString(s1)
+	for i := 0; i < 1000; i++ {
+		str.WriteString(s2)
+	}
+
+	return str.String()
 }
 func stringBuilderThousandTimes() string {
 	s1 := "hello"
@@ -72,7 +121,7 @@ func stringBuilderThousandTimes() string {
 
 	var str strings.Builder
 	str.WriteString(s1)
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 1000; i++ {
 		str.WriteString(s2)
 	}
 
